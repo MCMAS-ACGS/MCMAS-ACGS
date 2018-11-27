@@ -1,0 +1,22 @@
+
+*************** The strategy types of agents are: _IR_ior_ior_IR_IR ***************
+
+******************** The output results for ATL* are as follows ***********************
+
+  Formula_ast number 1: <g0>((G ((odd && (! c1paid)) -> ((((K(DinCrypt1,((c2paid || c3paid) || c4paid))) && (! (K(DinCrypt1,c2paid)))) && (! (K(DinCrypt1,c3paid)))) && (! (K(DinCrypt1,c4paid))))))), is TRUE in the model.
+	Time for checking formula_ast 1 is: 6.928
+  Formula_ast number 2: <g0>((G ((odd && (! c2paid)) -> ((((K(DinCrypt2,((c1paid || c3paid) || c4paid))) && (! (K(DinCrypt2,c1paid)))) && (! (K(DinCrypt2,c3paid)))) && (! (K(DinCrypt2,c4paid))))))), is TRUE in the model.
+	Time for checking formula_ast 2 is: 6.744
+  Formula_ast number 3: <g0>((G ((odd && (! c3paid)) -> ((((K(DinCrypt3,((c1paid || c2paid) || c4paid))) && (! (K(DinCrypt3,c1paid)))) && (! (K(DinCrypt3,c2paid)))) && (! (K(DinCrypt3,c4paid))))))), is xxxxxxxxxxxxxxx FALSE xxxxxxxxxxxxxxx in the model.
+	Time for checking formula_ast 3 is: 7.242
+
+*************************************** THE END ***************************************
+  The total execution time = 21.011
+  The number of inits is: 80
+  BDD variables used in states_count are : 23
+  BDD variables used in actions_count are : 9
+  The number of BDD variables in existance is: 55
+  BDD memory in use = 11269824
+  The num of reachable states is: 384
+  The num of states is: 384
+

@@ -1,0 +1,137 @@
+-- Castles game
+-- This file is generated for 3 castles and 3 workers, 4(1 1 1)
+Semantics=SingleAssignment;
+
+Agent Environment
+  StrType:
+    IR;
+  end StrType
+  Obsvars:
+    Castle1_state : boolean; -- true: defeated
+    Castle2_state : boolean; -- true: defeated
+    Castle3_state : boolean; -- true: defeated
+  end Obsvars
+  Vars:
+    Castle1_HP : -1..3; -- Healthy Points
+    Castle2_HP : -1..3;
+    Castle3_HP : -1..3;
+    Castle1_defending_ready : boolean; --If Castle1 can be defended currently 
+    Castle2_defending_ready : boolean;
+    Castle3_defending_ready : boolean;
+  end Vars
+  Actions = { none };
+  Protocol:
+    Other : {none};
+  end Protocol
+  Evolution:  ---!(P1.Action = rq) 
+    Castle1_HP = Castle1_HP-1 if !(Castle1_HP=-1) and ((Worker1.Action=defend and Worker2.Action=attack1 and Worker3.Action=attack1) or (!(Worker1.Action=defend) and Worker2.Action=attack1 and !(Worker3.Action=attack1)) or (!(Worker1.Action=defend) and Worker3.Action=attack1 and !(Worker2.Action=attack1)));
+
+    Castle1_HP = Castle1_HP-2 if !(Castle1_HP<=0) and ((!(Worker1.Action=defend) and Worker2.Action=attack1 and Worker3.Action=attack1));
+
+    Castle1_HP = Castle1_HP if (Worker1.Action=defend and Worker2.Action=attack1 and !(Worker3.Action=attack1)) or (Worker1.Action=defend and Worker3.Action=attack1 and !(Worker2.Action=attack1)) or (!(Worker2.Action=attack1) and !(Worker3.Action=attack1));
+
+    Castle2_HP = Castle2_HP-1 if !(Castle2_HP=-1) and ((Worker2.Action=defend and Worker1.Action=attack2 and Worker3.Action=attack2) or (!(Worker2.Action=defend) and Worker1.Action=attack2 and !(Worker3.Action=attack2)) or (!(Worker2.Action=defend) and Worker3.Action=attack2 and !(Worker1.Action=attack2)));
+
+    Castle2_HP = Castle2_HP-2 if !(Castle2_HP<=0) and ((!(Worker2.Action=defend) and Worker1.Action=attack2 and Worker3.Action=attack2));
+
+    Castle2_HP = Castle2_HP if (Worker2.Action=defend and Worker1.Action=attack2 and !(Worker3.Action=attack2)) or (Worker2.Action=defend and Worker3.Action=attack2 and !(Worker1.Action=attack2)) or (!(Worker1.Action=attack2) and !(Worker3.Action=attack2));
+
+    Castle3_HP = Castle3_HP-1 if !(Castle3_HP=-1) and ((Worker3.Action=defend and Worker1.Action=attack3 and Worker2.Action=attack3) or (!(Worker3.Action=defend) and Worker1.Action=attack3 and !(Worker2.Action=attack3)) or (!(Worker3.Action=defend) and Worker2.Action=attack3 and !(Worker1.Action=attack3)));
+
+    Castle3_HP = Castle3_HP-2 if !(Castle3_HP<=0) and ((!(Worker3.Action=defend) and Worker1.Action=attack3 and Worker2.Action=attack3));
+
+    Castle3_HP = Castle3_HP if (Worker3.Action=defend and Worker1.Action=attack3 and !(Worker2.Action=attack3)) or (Worker3.Action=defend and Worker2.Action=attack3 and !(Worker1.Action=attack3)) or (!(Worker1.Action=attack3) and !(Worker2.Action=attack3));
+
+    Castle1_state=true if Castle1_HP<=0;
+    Castle1_defending_ready=true if Castle1_defending_ready=false;
+    Castle1_defending_ready=false if (Castle1_defending_ready=true and Worker1.Action=defend);
+    Castle2_state=true if Castle2_HP<=0;
+    Castle2_defending_ready=true if Castle2_defending_ready=false;
+    Castle2_defending_ready=false if (Castle2_defending_ready=true and Worker2.Action=defend);
+    Castle3_state=true if Castle3_HP<=0;
+    Castle3_defending_ready=true if Castle3_defending_ready=false;
+    Castle3_defending_ready=false if (Castle3_defending_ready=true and Worker3.Action=defend);
+  end Evolution
+end Agent
+
+Agent Worker1
+  StrType:
+    ior;
+  end StrType
+  Lobsvars = {Castle1_defending_ready}; -- the obversable state of other workers
+  Vars:
+    state : {empty};
+  end Vars
+  Actions = { attack2,attack3, defend, none };
+  Protocol:
+    (Environment.Castle1_state=false and Environment.Castle1_defending_ready=false): {attack2,attack3,none};
+    (Environment.Castle1_state=false and Environment.Castle1_defending_ready=true) : {attack2,attack3,defend,none};
+    Environment.Castle1_state=true:{none}; 
+  end Protocol
+  Evolution:
+    state=empty if state=empty;
+  end Evolution
+end Agent
+
+Agent Worker2
+  StrType:
+    IR;
+  end StrType
+  Lobsvars = {Castle2_defending_ready}; -- the obversable state of other workers
+  Vars:
+    state : {empty};
+  end Vars
+  Actions = { attack1,attack3, defend, none };
+  Protocol:
+    (Environment.Castle2_state=false and Environment.Castle2_defending_ready=false): {attack1,attack3,none};
+    (Environment.Castle2_state=false and Environment.Castle2_defending_ready=true) : {attack1,attack3,defend,none};
+    Environment.Castle2_state=true:{none}; 
+  end Protocol
+  Evolution:
+    state=empty if state=empty;
+  end Evolution
+end Agent
+
+Agent Worker3
+  StrType:
+    IR;
+  end StrType
+  Lobsvars = {Castle3_defending_ready}; -- the obversable state of other workers
+  Vars:
+    state : {empty};
+  end Vars
+  Actions = { attack1, attack2, defend, none };
+  Protocol:
+    (Environment.Castle3_state=false and Environment.Castle3_defending_ready=false): {attack1,attack2,none};
+    (Environment.Castle3_state=false and Environment.Castle3_defending_ready=true) : {attack1,attack2,defend,none};
+    Environment.Castle3_state=true:{none}; 
+  end Protocol
+  Evolution:
+    state=empty if state=empty;
+  end Evolution
+end Agent
+ 
+Evaluation
+  castle1Defeated if (Environment.Castle1_state=true );
+  castle2Defeated if (Environment.Castle2_state=true );
+  castle3Defeated if (Environment.Castle3_state=true );
+  allDefeated if (Environment.Castle1_state=true ) and (Environment.Castle2_state=true ) and (Environment.Castle3_state=true );
+end Evaluation
+
+InitStates
+ Worker1.state=empty and Worker2.state=empty and Worker3.state=empty 
+ and Environment.Castle1_state=false and Environment.Castle2_state=false and Environment.Castle3_state=false 
+ and Environment.Castle1_HP=3 and Environment.Castle2_HP=3 and Environment.Castle3_HP=3
+ and Environment.Castle1_defending_ready=true and  Environment.Castle2_defending_ready=true
+ and Environment.Castle3_defending_ready=true;
+end InitStates
+
+Groups
+  c12={Worker1,Worker2};
+end Groups
+
+Formulae_ast
+  <c12>F castle3Defeated;
+  --<c12>G !castle1Defeated;
+  <c12>F allDefeated;
+end Formulae_ast

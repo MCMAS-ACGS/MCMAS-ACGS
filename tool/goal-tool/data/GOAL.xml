@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>GOAL configuration file</comment>
+<entry key="RandomAutomatonGenerationModel">PROBABILITY</entry>
+<entry key="GlobalOptimizationSolverDelegation">McNaughton-Zielonka</entry>
+<entry key="GlobalOptimizationSolverSelfloop">true</entry>
+<entry key="RandomAutomatonAlphabetType">Propositional</entry>
+<entry key="RandomAutomatonSimulation">false</entry>
+<entry key="ReachabilitySolverMaxStrategy">false</entry>
+<entry key="RandomAutomatonStateSize">5</entry>
+<entry key="RandomAutomatonTransitionDensity">1.0</entry>
+<entry key="RecentFile6">G:\dd-resource\bitbucket\MAS\mc-on-atl\ATLK-mc-no-ptr\data\my_dpa.dpa</entry>
+<entry key="RecentFile5">G:\dd-resource\bitbucket\MAS\mc-on-atl\ATLK-mc-no-ptr\data\my_pg.gff</entry>
+<entry key="RecentFile4">D:\mc\data\my_pg.gff</entry>
+<entry key="RandomAutomatonAcceptanceDensity">0.5</entry>
+<entry key="RecentFile3">C:\Users\dell\Desktop\my_dpa.dpa.gff</entry>
+<entry key="RecentFile2">D:\SCGS_MCMAS\mc-all_reach\data\my_buchi.gff</entry>
+<entry key="RecentFile1">D:\SCGS_MCMAS\mc-all_reach\data\my_dpa.dpa</entry>
+<entry key="RecentFile0">D:\SCGS_MCMAS\mc-all_reach\data\my_pg.gff</entry>
+<entry key="RandomAutomatonCountSimplified">false</entry>
+<entry key="RandomAutomatonSymbolProbability">0.5</entry>
+<entry key="GlobalOptimizationParityCompression">true</entry>
+<entry key="RandomAutomatonAcceptanceProbability">0.5</entry>
+<entry key="RandomAutomatonDeterministic">false</entry>
+<entry key="RandomAutomatonReduce">false</entry>
+<entry key="Player0WinningRegionColor">#66ccff</entry>
+<entry key="RandomAutomatonFairSimulation">false</entry>
+<entry key="NoneWinningRegionColor">#cccccc</entry>
+<entry key="RandomAutomatonAcceptanceCondition">Buchi</entry>
+<entry key="RandomAutomatonAcceptanceSetSize">3</entry>
+<entry key="ParityGameSolver">McNaughton-Zielonka</entry>
+<entry key="Player1WinningRegionColor">#ff66cc</entry>
+<entry key="RandomAutomatonTransitionProbability">0.5</entry>
+<entry key="RandomAutomatonPropositionSize">2</entry>
+<entry key="GlobalOptimizationParityPropagation">true</entry>
+<entry key="GlobalOptimizationSCCDecomposition">true</entry>
+</properties>

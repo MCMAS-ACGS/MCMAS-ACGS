@@ -1,0 +1,22 @@
+
+*************** The strategy types of agents are: _IR_ior_ior_IR_IR_IR_IR_IR_IR_IR ***************
+
+******************** The output results for ATL* are as follows ***********************
+
+  Formula_ast number 1: <g0>((G ((odd && (! c1paid)) -> (((((((((K(DinCrypt1,(((((((c2paid || c3paid) || c4paid) || c5paid) || c6paid) || c7paid) || c8paid) || c9paid))) && (! (K(DinCrypt1,c2paid)))) && (! (K(DinCrypt1,c3paid)))) && (! (K(DinCrypt1,c4paid)))) && (! (K(DinCrypt1,c5paid)))) && (! (K(DinCrypt1,c6paid)))) && (! (K(DinCrypt1,c7paid)))) && (! (K(DinCrypt1,c8paid)))) && (! (K(DinCrypt1,c9paid))))))), is TRUE in the model.
+	Time for checking formula_ast 1 is: 9.19
+  Formula_ast number 2: <g0>((G ((odd && (! c2paid)) -> (((((((((K(DinCrypt2,(((((((c1paid || c3paid) || c4paid) || c5paid) || c6paid) || c7paid) || c8paid) || c9paid))) && (! (K(DinCrypt2,c1paid)))) && (! (K(DinCrypt2,c3paid)))) && (! (K(DinCrypt2,c4paid)))) && (! (K(DinCrypt2,c5paid)))) && (! (K(DinCrypt2,c6paid)))) && (! (K(DinCrypt2,c7paid)))) && (! (K(DinCrypt2,c8paid)))) && (! (K(DinCrypt2,c9paid))))))), is TRUE in the model.
+	Time for checking formula_ast 2 is: 8.913
+  Formula_ast number 3: <g0>((G ((odd && (! c3paid)) -> (((((((((K(DinCrypt3,(((((((c2paid || c1paid) || c4paid) || c5paid) || c6paid) || c7paid) || c8paid) || c9paid))) && (! (K(DinCrypt3,c2paid)))) && (! (K(DinCrypt3,c1paid)))) && (! (K(DinCrypt3,c4paid)))) && (! (K(DinCrypt3,c5paid)))) && (! (K(DinCrypt3,c6paid)))) && (! (K(DinCrypt3,c7paid)))) && (! (K(DinCrypt3,c8paid)))) && (! (K(DinCrypt3,c9paid))))))), is xxxxxxxxxxxxxxx FALSE xxxxxxxxxxxxxxx in the model.
+	Time for checking formula_ast 3 is: 1.721
+
+*************************************** THE END ***************************************
+  The total execution time = 70.425
+  The number of inits is: 5120
+  BDD variables used in states_count are : 48
+  BDD variables used in actions_count are : 19
+  The number of BDD variables in existance is: 115
+  BDD memory in use = 53947040
+  The num of reachable states is: 22528
+  The num of states is: 22528
+

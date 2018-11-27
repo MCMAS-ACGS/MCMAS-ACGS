@@ -1,0 +1,20 @@
+
+*************** The strategy types of agents are: _IR_Ir_Ir ***************
+
+******************** The output results for ATL* are as follows ***********************
+
+  Formula_ast number 1: <g0>((G ((supplier_compliance && purchaser_compliance) -> (K(Supplier,<g>((F contract_end))))))), is TRUE in the model.
+	Time for checking formula_ast 1 is: 21.771
+  Formula_ast number 2: <g>(((supplier_compliance && purchaser_compliance) U (contract_end && (! contract_success)))), is TRUE in the model.
+	Time for checking formula_ast 2 is: 0.409
+
+*************************************** THE END ***************************************
+  The total execution time = 22.187
+  The number of inits is: 1
+  BDD variables used in states_count are : 8
+  BDD variables used in actions_count are : 7
+  The number of BDD variables in existance is: 23
+  BDD memory in use = 9513696
+  The num of reachable states is: 20
+  The num of states is: 180
+

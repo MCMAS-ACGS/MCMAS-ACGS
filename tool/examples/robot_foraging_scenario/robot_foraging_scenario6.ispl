@@ -1,0 +1,63 @@
+Agent Robot 
+  StrType:
+    Ir;
+  end StrType
+  Vars:
+    state : {r,rw,mf,sa};
+  end Vars 
+  Actions = {reached,search,fail,observe,scan,deposit}; 
+  Protocol:
+    state = r : {search};
+    state = rw : {observe,fail};
+    state = mf : {deposit,scan,reached};
+    state = sa : {observe,fail};
+  end Protocol 
+  Evolution: 
+    state=rw if state=r   and Action=search;
+    state=r  if (state=rw or state=sa)  and  Action=fail;
+    state=mf if (state=rw or state=sa) and Action=observe;
+    state=sa if state=mf  and Action=scan;
+    state=r  if state=mf  and Action=deposit;
+  end Evolution
+end Agent
+
+Agent FoodSource
+  StrType:
+    isr;
+  end StrType
+  Vars:
+    state : {n_f,f};
+  end Vars 
+  Actions={reached,observe,scan,deposit};
+  Protocol: 
+    state=n_f : {reached,observe,scan};
+    state=f : { deposit};
+  end Protocol 
+  Evolution: 
+    state=f   if Action=reached;
+  end Evolution 
+end Agent
+
+Evaluation
+  f if FoodSource.state=f;
+  o if Robot.state = mf;
+end Evaluation 
+
+InitStates
+   FoodSource.state=n_f and Robot.state=rw;
+end InitStates
+
+Groups
+g={Robot};
+f={FoodSource};
+end Groups
+
+Formulae_ast
+    G (f-> G f);
+    G K(Robot, G (F f));
+    K(Robot, <g>G (F f));
+    <g> G K(Robot, G (F f));
+    <g> G !(F f);
+end Formulae_ast
+
+                

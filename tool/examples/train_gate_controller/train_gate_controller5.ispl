@@ -1,0 +1,94 @@
+--Semantics=SingleAssignment;
+Agent Environment
+  StrType:
+    IR;
+  end StrType
+  Vars:
+    state   : {g,r};
+  end Vars 
+  Actions = { E1, E2, L1, L2};
+  Protocol:
+    state = g: { E1, E2};
+    state = r: { L1, L2};
+  end Protocol
+  Evolution: 
+    state = g if state=r and ((Action=L1 and T1.Action=L1) or (Action=L2 and T2.Action=L2));
+    state = r if state=g and ((Action=L1 and T1.Action=E1) or (Action=L2 and T2.Action=E2));
+  end Evolution 
+end Agent
+
+Agent T1
+  StrType:
+    Ir;
+  end StrType
+  Vars:
+    state : {w,t,a}; -- w:wait, t:tunnel, a:away
+  end Vars 
+  Actions ={E1,L1,B1};
+  Protocol:
+    state = w  : {E1};
+    state = t  : {L1};
+    state = a  : {B1};
+  end Protocol 
+  Evolution: 
+    state=w if state = a and Action=B1;
+    state=t if state = w and Action=E1 and Environment.Action=E1;
+    state=a if state = t and Action=L1 and Environment.Action=L1;
+  end Evolution
+end Agent
+
+Agent T2
+  StrType:
+    Ir;
+  end StrType
+  Vars:
+    state : {w,t,a}; -- w:wait, t:tunnel, a:away
+  end Vars 
+  Actions ={E2,L2,B2};
+  Protocol:
+    state = w  : {E2};
+    state = t  : {L2};
+    state = a  : {B2};
+  end Protocol 
+  Evolution: 
+    state=w if state = a and Action=B2;
+    state=t if state = w and Action=E2 and Environment.Action=E1;
+    state=a if state = t and Action=L2 and Environment.Action=L1;
+  end Evolution
+end Agent
+
+Evaluation
+  both_t if (T1.state = t and T2.state = t);
+  pt if T1.state = t;
+  pw if T1.state = w;
+  pa if T1.state = a;
+  nt if T2.state = t;
+  nw if T2.state = w;
+  na if T2.state = a;
+end Evaluation 
+
+InitStates 
+  Environment.state = g and T1.state = w and T2.state = t;
+end InitStates
+
+Groups
+g={T2,T1};
+g1={Environment};
+g2={T2};
+g3={T1};
+
+g0={Environment,T2};
+g4={Environment,T1};
+end Groups
+
+Formulae_ast
+  <g1>G ((pt-> K(T1, !nt)) and (nt-> K(T2, !pt)));
+  <g1>G (K(T1, G !both_t) and K(T2, G !both_t));
+  GK(g, G !both_t);
+  <g1>G GK(g, G !both_t);
+  (<g2>G K(T2, nw->F na)) and (<g3>G K(T1, pw->F pa));
+  (<g2>G(pw-> !(F pa))) and (<g3>G(nw-> !(F na)));  
+  <g2> G((pw-> !(F pa)) and (K(T1, pw->F pa )));
+  <g2> G((nw-> !(F na)) and (K(T2, nw->F na )));
+  <g0>G !(<g4> G(nw-> !(F na)));
+end Formulae_ast

@@ -1,0 +1,68 @@
+Agent OneA
+    StrType:
+        isr;
+    end StrType
+    Vars:
+        A_state : {A1,A2};
+    end Vars
+
+    Actions = {a1,a2};
+
+    Protocol:
+        A_state=A1 : {a1,a2};
+        A_state=A2 : {a2};
+    	
+    end Protocol
+
+    Evolution:
+        A_state=A1 if ((A_state=A1 and Action=a1 and OneB.Action=b1) or (A_state=A1 and Action=a2 and OneB.Action=b2) or (A_state=A2 and Action=a2 and OneB.Action=b2));
+        A_state=A2 if ((A_state=A1 and Action=a1 and OneB.Action=b2) or (A_state=A1 and Action=a2 and OneB.Action=b1) or (A_state=A2 and Action=a2 and OneB.Action=b1));     
+    end Evolution
+end Agent
+
+Agent OneB
+    StrType:
+        isr;
+    end StrType
+    Vars:
+        B_state : {B1,B2,B3};
+    end Vars
+
+    Actions = {b1,b2};
+
+    Protocol:
+        B_state=B1 : {b1};
+        B_state=B2 : {b1,b2}; 
+        B_state=B3 : {b1};
+        --Other: {b1,b2};      
+    end Protocol
+
+    Evolution:
+        B_state=B2 if ((B_state=B1 and Action=b1 and OneA.Action=a1) or (B_state=B1 and Action=b1 and OneA.Action=a2) or (B_state=B2 and Action=b1 and OneA.Action=a2) );
+        B_state=B1 if ((B_state=B2 and Action=b2 and OneA.Action=a1) or (B_state=B3 and Action=b1 and OneA.Action=a1) or (B_state=B3 and Action=b1 and OneA.Action=a2));
+        B_state=B3 if ((B_state=B2 and Action=b1 and OneA.Action=a1) or (B_state=B2 and Action=b2 and OneA.Action=a2));
+    end Evolution
+end Agent
+
+
+Evaluation
+    eva if (OneA.A_state=A1 and OneB.B_state=B1);
+    eva1 if (OneA.A_state=A2 and OneB.B_state=B2);
+    eva2 if (OneA.A_state=A1 and OneB.B_state=B2);
+    test if ( (OneA.A_state=A1 and OneB.B_state=B1) or (OneA.A_state=A1 and OneB.B_state=B2) or (OneA.A_state=A2 and OneB.B_state=B1) or (OneA.A_state=A2 and OneB.B_state=B2) or (OneA.A_state=A1 and OneB.B_state=B3) or (OneA.A_state=A2 and OneB.B_state=B3));
+    --test if ( (OneA.A_state=A1 and OneB.B_state=B1) or (OneA.A_state=A1 and OneB.B_state=B2) or (OneA.A_state=A2 and OneB.B_state=B1) or (OneA.A_state=A2 and OneB.B_state=B2) or (OneA.A_state=A1 and OneB.B_state=B3));
+end Evaluation
+
+InitStates
+    OneA.A_state=A1 and OneB.B_state=B1;
+end InitStates
+
+Groups
+    g1={OneA};
+    g2={OneA,OneB};
+    
+end Groups
+
+Formulae_ast
+   F(<g2>G DK(g1, F test)); 
+end Formulae_ast

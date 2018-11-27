@@ -24,6 +24,7 @@ Since an external tool Goal is embedded in our model checker (under folder "goal
      - `./MCMAS_ACGS your_system_file.ispl`
      - support another two options: 
      
-        - -pg Choose Lemma for Model Checking (1 -- Lemma3, 0 -- Lemma1, default 1)"
-        - -sat Whether to check all of states or not (1 -- also check the unreachable states when the system starts from the given initial state, 0 not check, default 1)" 
+        - -pg "Choose Lemma for Model Checking (1 -- Lemma3, 0 -- Lemma1, default 1)"
+        - -sat "Whether to check all of states or not (1 -- also check the unreachable states when the system starts from the given initial state, 0 not check, default 1)"
+        - -print "Choose if print the model file into model_export folder (1 -- yes, 0 -- no, default 0)"
    
